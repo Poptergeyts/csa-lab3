@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "csa-lab3"
+version = "0.1.0"
+description = ""
+authors = ["Шубин Илья"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+ruff = "^0.6.8"
+coverage = "^7.6.1"
+pytest = "^8.3.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

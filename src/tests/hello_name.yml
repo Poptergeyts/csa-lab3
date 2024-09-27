@@ -1,0 +1,1001 @@
+asm: |-
+  .data
+      question: 'What is your name? '
+      greeting: 'Hello, '
+      sign: '!'
+      name: ' ' 32
+      io: 0x3ff
+  .code
+      push question
+      print_question_loop:
+          ld
+          test
+          push print_question_exit
+          jz
+          push io
+          ld
+          swap
+          pop
+          st
+          pop
+          inc
+          push print_question_loop
+          jmp
+      print_question_exit:
+          pop
+          pop
+          push name
+          push io
+          ld
+      get_name_loop:
+          ld
+          test
+          push get_name_exit
+          jz
+          swap
+          pop
+          swap
+          pop
+          swap
+          st
+          inc
+          push io
+          ld
+          push get_name_loop
+          jmp
+      get_name_exit:
+          swap
+          pop
+          swap
+          pop
+          swap
+          st
+          pop
+          push greeting
+      print_greeting_loop:
+          ld
+          test
+          push print_greeting_exit
+          jz
+          push io
+          ld
+          swap
+          pop
+          st
+          pop
+          inc
+          push print_greeting_loop
+          jmp
+      print_greeting_exit:
+          pop
+          pop
+          push name
+      print_name_loop:
+          ld
+          test
+          push print_name_exit
+          jz
+          push io
+          ld
+          swap
+          pop
+          st
+          pop
+          inc
+          push print_name_loop
+          jmp
+      print_name_exit:
+          pop
+          pop
+          push sign
+          ld
+          push io
+          ld
+          swap
+          pop
+          st
+          pop
+          pop
+          hlt
+input: |-
+  Ilia
+log: |
+  TICK:    0 PC:   0 AR:    0 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 0}      DATA: 87     STACK: []
+  TICK:    3 PC:   1 AR:    0 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 87     STACK: [0]
+  TICK:    7 PC:   2 AR:    0 Z_FLAG: 1  COMMAND: {'code': 'test', 'arg': None}   DATA: 87     STACK: [0, 87]
+  TICK:   10 PC:   3 AR:    0 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 87     STACK: [0, 87]
+  TICK:   13 PC:   4 AR:    0 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 87     STACK: [0, 87, 14]
+  TICK:   16 PC:   5 AR:    0 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 87     STACK: [0, 87]
+  TICK:   19 PC:   6 AR:    0 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 87     STACK: [0, 87, 62]
+  TICK:   23 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [0, 87, 62, 1023]
+  TICK:   28 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [0, 87, 1023, 62]
+  TICK:   31 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [0, 87, 1023]
+  TICK:   39 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [0, 1023]
+  TICK:   42 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [0]
+  TICK:   45 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [1]
+  TICK:   48 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [1, 1]
+  TICK:   52 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [1]
+  TICK:   56 PC:   2 AR:    1 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 104    STACK: [1, 104]
+  TICK:   59 PC:   3 AR:    1 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 104    STACK: [1, 104]
+  TICK:   62 PC:   4 AR:    1 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 104    STACK: [1, 104, 14]
+  TICK:   65 PC:   5 AR:    1 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 104    STACK: [1, 104]
+  TICK:   68 PC:   6 AR:    1 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 104    STACK: [1, 104, 62]
+  TICK:   72 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [1, 104, 62, 1023]
+  TICK:   77 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [1, 104, 1023, 62]
+  TICK:   80 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [1, 104, 1023]
+  TICK:   88 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [1, 1023]
+  TICK:   91 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [1]
+  TICK:   94 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [2]
+  TICK:   97 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [2, 1]
+  TICK:  101 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [2]
+  TICK:  105 PC:   2 AR:    2 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 97     STACK: [2, 97]
+  TICK:  108 PC:   3 AR:    2 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 97     STACK: [2, 97]
+  TICK:  111 PC:   4 AR:    2 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 97     STACK: [2, 97, 14]
+  TICK:  114 PC:   5 AR:    2 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 97     STACK: [2, 97]
+  TICK:  117 PC:   6 AR:    2 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 97     STACK: [2, 97, 62]
+  TICK:  121 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [2, 97, 62, 1023]
+  TICK:  126 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [2, 97, 1023, 62]
+  TICK:  129 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [2, 97, 1023]
+  TICK:  137 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [2, 1023]
+  TICK:  140 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [2]
+  TICK:  143 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [3]
+  TICK:  146 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [3, 1]
+  TICK:  150 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [3]
+  TICK:  154 PC:   2 AR:    3 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 116    STACK: [3, 116]
+  TICK:  157 PC:   3 AR:    3 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 116    STACK: [3, 116]
+  TICK:  160 PC:   4 AR:    3 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 116    STACK: [3, 116, 14]
+  TICK:  163 PC:   5 AR:    3 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 116    STACK: [3, 116]
+  TICK:  166 PC:   6 AR:    3 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 116    STACK: [3, 116, 62]
+  TICK:  170 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [3, 116, 62, 1023]
+  TICK:  175 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [3, 116, 1023, 62]
+  TICK:  178 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [3, 116, 1023]
+  TICK:  186 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [3, 1023]
+  TICK:  189 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [3]
+  TICK:  192 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [4]
+  TICK:  195 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [4, 1]
+  TICK:  199 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [4]
+  TICK:  203 PC:   2 AR:    4 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 32     STACK: [4, 32]
+  TICK:  206 PC:   3 AR:    4 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 32     STACK: [4, 32]
+  TICK:  209 PC:   4 AR:    4 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 32     STACK: [4, 32, 14]
+  TICK:  212 PC:   5 AR:    4 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 32     STACK: [4, 32]
+  TICK:  215 PC:   6 AR:    4 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 32     STACK: [4, 32, 62]
+  TICK:  219 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [4, 32, 62, 1023]
+  TICK:  224 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [4, 32, 1023, 62]
+  TICK:  227 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [4, 32, 1023]
+  TICK:  235 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [4, 1023]
+  TICK:  238 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [4]
+  TICK:  241 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [5]
+  TICK:  244 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [5, 1]
+  TICK:  248 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [5]
+  TICK:  252 PC:   2 AR:    5 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 105    STACK: [5, 105]
+  TICK:  255 PC:   3 AR:    5 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 105    STACK: [5, 105]
+  TICK:  258 PC:   4 AR:    5 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 105    STACK: [5, 105, 14]
+  TICK:  261 PC:   5 AR:    5 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 105    STACK: [5, 105]
+  TICK:  264 PC:   6 AR:    5 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 105    STACK: [5, 105, 62]
+  TICK:  268 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [5, 105, 62, 1023]
+  TICK:  273 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [5, 105, 1023, 62]
+  TICK:  276 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [5, 105, 1023]
+  TICK:  284 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [5, 1023]
+  TICK:  287 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [5]
+  TICK:  290 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [6]
+  TICK:  293 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [6, 1]
+  TICK:  297 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [6]
+  TICK:  301 PC:   2 AR:    6 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 115    STACK: [6, 115]
+  TICK:  304 PC:   3 AR:    6 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 115    STACK: [6, 115]
+  TICK:  307 PC:   4 AR:    6 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 115    STACK: [6, 115, 14]
+  TICK:  310 PC:   5 AR:    6 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 115    STACK: [6, 115]
+  TICK:  313 PC:   6 AR:    6 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 115    STACK: [6, 115, 62]
+  TICK:  317 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [6, 115, 62, 1023]
+  TICK:  322 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [6, 115, 1023, 62]
+  TICK:  325 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [6, 115, 1023]
+  TICK:  333 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [6, 1023]
+  TICK:  336 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [6]
+  TICK:  339 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [7]
+  TICK:  342 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [7, 1]
+  TICK:  346 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [7]
+  TICK:  350 PC:   2 AR:    7 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 32     STACK: [7, 32]
+  TICK:  353 PC:   3 AR:    7 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 32     STACK: [7, 32]
+  TICK:  356 PC:   4 AR:    7 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 32     STACK: [7, 32, 14]
+  TICK:  359 PC:   5 AR:    7 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 32     STACK: [7, 32]
+  TICK:  362 PC:   6 AR:    7 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 32     STACK: [7, 32, 62]
+  TICK:  366 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [7, 32, 62, 1023]
+  TICK:  371 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [7, 32, 1023, 62]
+  TICK:  374 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [7, 32, 1023]
+  TICK:  382 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [7, 1023]
+  TICK:  385 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [7]
+  TICK:  388 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [8]
+  TICK:  391 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [8, 1]
+  TICK:  395 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [8]
+  TICK:  399 PC:   2 AR:    8 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 121    STACK: [8, 121]
+  TICK:  402 PC:   3 AR:    8 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 121    STACK: [8, 121]
+  TICK:  405 PC:   4 AR:    8 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 121    STACK: [8, 121, 14]
+  TICK:  408 PC:   5 AR:    8 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 121    STACK: [8, 121]
+  TICK:  411 PC:   6 AR:    8 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 121    STACK: [8, 121, 62]
+  TICK:  415 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [8, 121, 62, 1023]
+  TICK:  420 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [8, 121, 1023, 62]
+  TICK:  423 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [8, 121, 1023]
+  TICK:  431 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [8, 1023]
+  TICK:  434 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [8]
+  TICK:  437 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [9]
+  TICK:  440 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [9, 1]
+  TICK:  444 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [9]
+  TICK:  448 PC:   2 AR:    9 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 111    STACK: [9, 111]
+  TICK:  451 PC:   3 AR:    9 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 111    STACK: [9, 111]
+  TICK:  454 PC:   4 AR:    9 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 111    STACK: [9, 111, 14]
+  TICK:  457 PC:   5 AR:    9 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 111    STACK: [9, 111]
+  TICK:  460 PC:   6 AR:    9 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 111    STACK: [9, 111, 62]
+  TICK:  464 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [9, 111, 62, 1023]
+  TICK:  469 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [9, 111, 1023, 62]
+  TICK:  472 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [9, 111, 1023]
+  TICK:  480 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [9, 1023]
+  TICK:  483 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [9]
+  TICK:  486 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [10]
+  TICK:  489 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [10, 1]
+  TICK:  493 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [10]
+  TICK:  497 PC:   2 AR:   10 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 117    STACK: [10, 117]
+  TICK:  500 PC:   3 AR:   10 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 117    STACK: [10, 117]
+  TICK:  503 PC:   4 AR:   10 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 117    STACK: [10, 117, 14]
+  TICK:  506 PC:   5 AR:   10 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 117    STACK: [10, 117]
+  TICK:  509 PC:   6 AR:   10 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 117    STACK: [10, 117, 62]
+  TICK:  513 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [10, 117, 62, 1023]
+  TICK:  518 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [10, 117, 1023, 62]
+  TICK:  521 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [10, 117, 1023]
+  TICK:  529 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [10, 1023]
+  TICK:  532 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [10]
+  TICK:  535 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [11]
+  TICK:  538 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [11, 1]
+  TICK:  542 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [11]
+  TICK:  546 PC:   2 AR:   11 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 114    STACK: [11, 114]
+  TICK:  549 PC:   3 AR:   11 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 114    STACK: [11, 114]
+  TICK:  552 PC:   4 AR:   11 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 114    STACK: [11, 114, 14]
+  TICK:  555 PC:   5 AR:   11 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 114    STACK: [11, 114]
+  TICK:  558 PC:   6 AR:   11 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 114    STACK: [11, 114, 62]
+  TICK:  562 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [11, 114, 62, 1023]
+  TICK:  567 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [11, 114, 1023, 62]
+  TICK:  570 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [11, 114, 1023]
+  TICK:  578 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [11, 1023]
+  TICK:  581 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [11]
+  TICK:  584 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [12]
+  TICK:  587 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [12, 1]
+  TICK:  591 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [12]
+  TICK:  595 PC:   2 AR:   12 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 32     STACK: [12, 32]
+  TICK:  598 PC:   3 AR:   12 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 32     STACK: [12, 32]
+  TICK:  601 PC:   4 AR:   12 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 32     STACK: [12, 32, 14]
+  TICK:  604 PC:   5 AR:   12 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 32     STACK: [12, 32]
+  TICK:  607 PC:   6 AR:   12 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 32     STACK: [12, 32, 62]
+  TICK:  611 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [12, 32, 62, 1023]
+  TICK:  616 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [12, 32, 1023, 62]
+  TICK:  619 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [12, 32, 1023]
+  TICK:  627 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [12, 1023]
+  TICK:  630 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [12]
+  TICK:  633 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [13]
+  TICK:  636 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [13, 1]
+  TICK:  640 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [13]
+  TICK:  644 PC:   2 AR:   13 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 110    STACK: [13, 110]
+  TICK:  647 PC:   3 AR:   13 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 110    STACK: [13, 110]
+  TICK:  650 PC:   4 AR:   13 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 110    STACK: [13, 110, 14]
+  TICK:  653 PC:   5 AR:   13 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 110    STACK: [13, 110]
+  TICK:  656 PC:   6 AR:   13 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 110    STACK: [13, 110, 62]
+  TICK:  660 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [13, 110, 62, 1023]
+  TICK:  665 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [13, 110, 1023, 62]
+  TICK:  668 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [13, 110, 1023]
+  TICK:  676 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [13, 1023]
+  TICK:  679 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [13]
+  TICK:  682 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [14]
+  TICK:  685 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [14, 1]
+  TICK:  689 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [14]
+  TICK:  693 PC:   2 AR:   14 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 97     STACK: [14, 97]
+  TICK:  696 PC:   3 AR:   14 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 97     STACK: [14, 97]
+  TICK:  699 PC:   4 AR:   14 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 97     STACK: [14, 97, 14]
+  TICK:  702 PC:   5 AR:   14 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 97     STACK: [14, 97]
+  TICK:  705 PC:   6 AR:   14 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 97     STACK: [14, 97, 62]
+  TICK:  709 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [14, 97, 62, 1023]
+  TICK:  714 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [14, 97, 1023, 62]
+  TICK:  717 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [14, 97, 1023]
+  TICK:  725 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [14, 1023]
+  TICK:  728 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [14]
+  TICK:  731 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [15]
+  TICK:  734 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [15, 1]
+  TICK:  738 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [15]
+  TICK:  742 PC:   2 AR:   15 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 109    STACK: [15, 109]
+  TICK:  745 PC:   3 AR:   15 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 109    STACK: [15, 109]
+  TICK:  748 PC:   4 AR:   15 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 109    STACK: [15, 109, 14]
+  TICK:  751 PC:   5 AR:   15 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 109    STACK: [15, 109]
+  TICK:  754 PC:   6 AR:   15 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 109    STACK: [15, 109, 62]
+  TICK:  758 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [15, 109, 62, 1023]
+  TICK:  763 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [15, 109, 1023, 62]
+  TICK:  766 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [15, 109, 1023]
+  TICK:  774 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [15, 1023]
+  TICK:  777 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [15]
+  TICK:  780 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [16]
+  TICK:  783 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [16, 1]
+  TICK:  787 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [16]
+  TICK:  791 PC:   2 AR:   16 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 101    STACK: [16, 101]
+  TICK:  794 PC:   3 AR:   16 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 101    STACK: [16, 101]
+  TICK:  797 PC:   4 AR:   16 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 101    STACK: [16, 101, 14]
+  TICK:  800 PC:   5 AR:   16 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 101    STACK: [16, 101]
+  TICK:  803 PC:   6 AR:   16 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 101    STACK: [16, 101, 62]
+  TICK:  807 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [16, 101, 62, 1023]
+  TICK:  812 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [16, 101, 1023, 62]
+  TICK:  815 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [16, 101, 1023]
+  TICK:  823 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [16, 1023]
+  TICK:  826 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [16]
+  TICK:  829 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [17]
+  TICK:  832 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [17, 1]
+  TICK:  836 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [17]
+  TICK:  840 PC:   2 AR:   17 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 63     STACK: [17, 63]
+  TICK:  843 PC:   3 AR:   17 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 63     STACK: [17, 63]
+  TICK:  846 PC:   4 AR:   17 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 63     STACK: [17, 63, 14]
+  TICK:  849 PC:   5 AR:   17 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 63     STACK: [17, 63]
+  TICK:  852 PC:   6 AR:   17 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 63     STACK: [17, 63, 62]
+  TICK:  856 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [17, 63, 62, 1023]
+  TICK:  861 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [17, 63, 1023, 62]
+  TICK:  864 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [17, 63, 1023]
+  TICK:  872 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [17, 1023]
+  TICK:  875 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [17]
+  TICK:  878 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [18]
+  TICK:  881 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [18, 1]
+  TICK:  885 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [18]
+  TICK:  889 PC:   2 AR:   18 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 32     STACK: [18, 32]
+  TICK:  892 PC:   3 AR:   18 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 14}     DATA: 32     STACK: [18, 32]
+  TICK:  895 PC:   4 AR:   18 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 32     STACK: [18, 32, 14]
+  TICK:  898 PC:   5 AR:   18 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 32     STACK: [18, 32]
+  TICK:  901 PC:   6 AR:   18 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 32     STACK: [18, 32, 62]
+  TICK:  905 PC:   7 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [18, 32, 62, 1023]
+  TICK:  910 PC:   8 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [18, 32, 1023, 62]
+  TICK:  913 PC:   9 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [18, 32, 1023]
+  TICK:  921 PC:  10 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [18, 1023]
+  TICK:  924 PC:  11 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [18]
+  TICK:  927 PC:  12 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 1}      DATA: 0      STACK: [19]
+  TICK:  930 PC:  13 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [19, 1]
+  TICK:  934 PC:   1 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [19]
+  TICK:  938 PC:   2 AR:   19 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 0      STACK: [19, 0]
+  TICK:  941 PC:   3 AR:   19 Z_FLAG: 1  COMMAND: {'code': 'push', 'arg': 14}     DATA: 0      STACK: [19, 0]
+  TICK:  944 PC:   4 AR:   19 Z_FLAG: 1  COMMAND: {'code': 'jz', 'arg': None}     DATA: 0      STACK: [19, 0, 14]
+  TICK:  948 PC:  14 AR:   19 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [19, 0]
+  TICK:  951 PC:  15 AR:   19 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [19]
+  TICK:  954 PC:  16 AR:   19 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 30}     DATA: 0      STACK: []
+  TICK:  957 PC:  17 AR:   19 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 0      STACK: [30]
+  TICK:  960 PC:  18 AR:   19 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [30, 62]
+  TICK:  964 PC:  19 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 1023   STACK: [30, 62, 1023]
+  TICK:  968 PC:  20 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 0      STACK: [30, 62, 1023, 73]
+  TICK:  971 PC:  21 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 34}     DATA: 0      STACK: [30, 62, 1023, 73]
+  TICK:  974 PC:  22 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 0      STACK: [30, 62, 1023, 73, 34]
+  TICK:  977 PC:  23 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [30, 62, 1023, 73]
+  TICK:  982 PC:  24 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [30, 62, 73, 1023]
+  TICK:  985 PC:  25 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [30, 62, 73]
+  TICK:  990 PC:  26 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [30, 73, 62]
+  TICK:  993 PC:  27 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [30, 73]
+  TICK:  998 PC:  28 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 0      STACK: [73, 30]
+  TICK: 1006 PC:  29 AR:   30 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 73     STACK: [30]
+  TICK: 1009 PC:  30 AR:   30 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 73     STACK: [31]
+  TICK: 1012 PC:  31 AR:   30 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 73     STACK: [31, 62]
+  TICK: 1016 PC:  32 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 19}     DATA: 1023   STACK: [31, 62, 1023]
+  TICK: 1019 PC:  33 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 1023   STACK: [31, 62, 1023, 19]
+  TICK: 1023 PC:  19 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 1023   STACK: [31, 62, 1023]
+  TICK: 1027 PC:  20 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 0      STACK: [31, 62, 1023, 108]
+  TICK: 1030 PC:  21 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 34}     DATA: 0      STACK: [31, 62, 1023, 108]
+  TICK: 1033 PC:  22 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 0      STACK: [31, 62, 1023, 108, 34]
+  TICK: 1036 PC:  23 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [31, 62, 1023, 108]
+  TICK: 1041 PC:  24 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [31, 62, 108, 1023]
+  TICK: 1044 PC:  25 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [31, 62, 108]
+  TICK: 1049 PC:  26 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [31, 108, 62]
+  TICK: 1052 PC:  27 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [31, 108]
+  TICK: 1057 PC:  28 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 0      STACK: [108, 31]
+  TICK: 1065 PC:  29 AR:   31 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 108    STACK: [31]
+  TICK: 1068 PC:  30 AR:   31 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 108    STACK: [32]
+  TICK: 1071 PC:  31 AR:   31 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 108    STACK: [32, 62]
+  TICK: 1075 PC:  32 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 19}     DATA: 1023   STACK: [32, 62, 1023]
+  TICK: 1078 PC:  33 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 1023   STACK: [32, 62, 1023, 19]
+  TICK: 1082 PC:  19 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 1023   STACK: [32, 62, 1023]
+  TICK: 1086 PC:  20 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 0      STACK: [32, 62, 1023, 105]
+  TICK: 1089 PC:  21 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 34}     DATA: 0      STACK: [32, 62, 1023, 105]
+  TICK: 1092 PC:  22 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 0      STACK: [32, 62, 1023, 105, 34]
+  TICK: 1095 PC:  23 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [32, 62, 1023, 105]
+  TICK: 1100 PC:  24 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [32, 62, 105, 1023]
+  TICK: 1103 PC:  25 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [32, 62, 105]
+  TICK: 1108 PC:  26 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [32, 105, 62]
+  TICK: 1111 PC:  27 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [32, 105]
+  TICK: 1116 PC:  28 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 0      STACK: [105, 32]
+  TICK: 1124 PC:  29 AR:   32 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 105    STACK: [32]
+  TICK: 1127 PC:  30 AR:   32 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 105    STACK: [33]
+  TICK: 1130 PC:  31 AR:   32 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 105    STACK: [33, 62]
+  TICK: 1134 PC:  32 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 19}     DATA: 1023   STACK: [33, 62, 1023]
+  TICK: 1137 PC:  33 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 1023   STACK: [33, 62, 1023, 19]
+  TICK: 1141 PC:  19 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 1023   STACK: [33, 62, 1023]
+  TICK: 1145 PC:  20 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 0      STACK: [33, 62, 1023, 97]
+  TICK: 1148 PC:  21 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 34}     DATA: 0      STACK: [33, 62, 1023, 97]
+  TICK: 1151 PC:  22 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 0      STACK: [33, 62, 1023, 97, 34]
+  TICK: 1154 PC:  23 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [33, 62, 1023, 97]
+  TICK: 1159 PC:  24 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [33, 62, 97, 1023]
+  TICK: 1162 PC:  25 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [33, 62, 97]
+  TICK: 1167 PC:  26 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [33, 97, 62]
+  TICK: 1170 PC:  27 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [33, 97]
+  TICK: 1175 PC:  28 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 0      STACK: [97, 33]
+  TICK: 1183 PC:  29 AR:   33 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 97     STACK: [33]
+  TICK: 1186 PC:  30 AR:   33 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 97     STACK: [34]
+  TICK: 1189 PC:  31 AR:   33 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 97     STACK: [34, 62]
+  TICK: 1193 PC:  32 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 19}     DATA: 1023   STACK: [34, 62, 1023]
+  TICK: 1196 PC:  33 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 1023   STACK: [34, 62, 1023, 19]
+  TICK: 1200 PC:  19 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 1023   STACK: [34, 62, 1023]
+  TICK: 1204 PC:  20 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 0      STACK: [34, 62, 1023, 0]
+  TICK: 1207 PC:  21 AR: 1023 Z_FLAG: 1  COMMAND: {'code': 'push', 'arg': 34}     DATA: 0      STACK: [34, 62, 1023, 0]
+  TICK: 1210 PC:  22 AR: 1023 Z_FLAG: 1  COMMAND: {'code': 'jz', 'arg': None}     DATA: 0      STACK: [34, 62, 1023, 0, 34]
+  TICK: 1214 PC:  34 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [34, 62, 1023, 0]
+  TICK: 1219 PC:  35 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [34, 62, 0, 1023]
+  TICK: 1222 PC:  36 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [34, 62, 0]
+  TICK: 1227 PC:  37 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [34, 0, 62]
+  TICK: 1230 PC:  38 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 0      STACK: [34, 0]
+  TICK: 1235 PC:  39 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 0      STACK: [0, 34]
+  TICK: 1243 PC:  40 AR:   34 Z_FLAG: 1  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [34]
+  TICK: 1246 PC:  41 AR:   34 Z_FLAG: 1  COMMAND: {'code': 'push', 'arg': 20}     DATA: 0      STACK: []
+  TICK: 1249 PC:  42 AR:   34 Z_FLAG: 1  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [20]
+  TICK: 1253 PC:  43 AR:   20 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 72     STACK: [20, 72]
+  TICK: 1256 PC:  44 AR:   20 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 55}     DATA: 72     STACK: [20, 72]
+  TICK: 1259 PC:  45 AR:   20 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 72     STACK: [20, 72, 55]
+  TICK: 1262 PC:  46 AR:   20 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 72     STACK: [20, 72]
+  TICK: 1265 PC:  47 AR:   20 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 72     STACK: [20, 72, 62]
+  TICK: 1269 PC:  48 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [20, 72, 62, 1023]
+  TICK: 1274 PC:  49 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [20, 72, 1023, 62]
+  TICK: 1277 PC:  50 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [20, 72, 1023]
+  TICK: 1285 PC:  51 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [20, 1023]
+  TICK: 1288 PC:  52 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [20]
+  TICK: 1291 PC:  53 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 42}     DATA: 0      STACK: [21]
+  TICK: 1294 PC:  54 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [21, 42]
+  TICK: 1298 PC:  42 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [21]
+  TICK: 1302 PC:  43 AR:   21 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 101    STACK: [21, 101]
+  TICK: 1305 PC:  44 AR:   21 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 55}     DATA: 101    STACK: [21, 101]
+  TICK: 1308 PC:  45 AR:   21 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 101    STACK: [21, 101, 55]
+  TICK: 1311 PC:  46 AR:   21 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 101    STACK: [21, 101]
+  TICK: 1314 PC:  47 AR:   21 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 101    STACK: [21, 101, 62]
+  TICK: 1318 PC:  48 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [21, 101, 62, 1023]
+  TICK: 1323 PC:  49 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [21, 101, 1023, 62]
+  TICK: 1326 PC:  50 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [21, 101, 1023]
+  TICK: 1334 PC:  51 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [21, 1023]
+  TICK: 1337 PC:  52 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [21]
+  TICK: 1340 PC:  53 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 42}     DATA: 0      STACK: [22]
+  TICK: 1343 PC:  54 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [22, 42]
+  TICK: 1347 PC:  42 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [22]
+  TICK: 1351 PC:  43 AR:   22 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 108    STACK: [22, 108]
+  TICK: 1354 PC:  44 AR:   22 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 55}     DATA: 108    STACK: [22, 108]
+  TICK: 1357 PC:  45 AR:   22 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 108    STACK: [22, 108, 55]
+  TICK: 1360 PC:  46 AR:   22 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 108    STACK: [22, 108]
+  TICK: 1363 PC:  47 AR:   22 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 108    STACK: [22, 108, 62]
+  TICK: 1367 PC:  48 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [22, 108, 62, 1023]
+  TICK: 1372 PC:  49 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [22, 108, 1023, 62]
+  TICK: 1375 PC:  50 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [22, 108, 1023]
+  TICK: 1383 PC:  51 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [22, 1023]
+  TICK: 1386 PC:  52 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [22]
+  TICK: 1389 PC:  53 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 42}     DATA: 0      STACK: [23]
+  TICK: 1392 PC:  54 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [23, 42]
+  TICK: 1396 PC:  42 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [23]
+  TICK: 1400 PC:  43 AR:   23 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 108    STACK: [23, 108]
+  TICK: 1403 PC:  44 AR:   23 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 55}     DATA: 108    STACK: [23, 108]
+  TICK: 1406 PC:  45 AR:   23 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 108    STACK: [23, 108, 55]
+  TICK: 1409 PC:  46 AR:   23 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 108    STACK: [23, 108]
+  TICK: 1412 PC:  47 AR:   23 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 108    STACK: [23, 108, 62]
+  TICK: 1416 PC:  48 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [23, 108, 62, 1023]
+  TICK: 1421 PC:  49 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [23, 108, 1023, 62]
+  TICK: 1424 PC:  50 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [23, 108, 1023]
+  TICK: 1432 PC:  51 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [23, 1023]
+  TICK: 1435 PC:  52 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [23]
+  TICK: 1438 PC:  53 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 42}     DATA: 0      STACK: [24]
+  TICK: 1441 PC:  54 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [24, 42]
+  TICK: 1445 PC:  42 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [24]
+  TICK: 1449 PC:  43 AR:   24 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 111    STACK: [24, 111]
+  TICK: 1452 PC:  44 AR:   24 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 55}     DATA: 111    STACK: [24, 111]
+  TICK: 1455 PC:  45 AR:   24 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 111    STACK: [24, 111, 55]
+  TICK: 1458 PC:  46 AR:   24 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 111    STACK: [24, 111]
+  TICK: 1461 PC:  47 AR:   24 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 111    STACK: [24, 111, 62]
+  TICK: 1465 PC:  48 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [24, 111, 62, 1023]
+  TICK: 1470 PC:  49 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [24, 111, 1023, 62]
+  TICK: 1473 PC:  50 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [24, 111, 1023]
+  TICK: 1481 PC:  51 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [24, 1023]
+  TICK: 1484 PC:  52 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [24]
+  TICK: 1487 PC:  53 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 42}     DATA: 0      STACK: [25]
+  TICK: 1490 PC:  54 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [25, 42]
+  TICK: 1494 PC:  42 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [25]
+  TICK: 1498 PC:  43 AR:   25 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 44     STACK: [25, 44]
+  TICK: 1501 PC:  44 AR:   25 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 55}     DATA: 44     STACK: [25, 44]
+  TICK: 1504 PC:  45 AR:   25 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 44     STACK: [25, 44, 55]
+  TICK: 1507 PC:  46 AR:   25 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 44     STACK: [25, 44]
+  TICK: 1510 PC:  47 AR:   25 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 44     STACK: [25, 44, 62]
+  TICK: 1514 PC:  48 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [25, 44, 62, 1023]
+  TICK: 1519 PC:  49 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [25, 44, 1023, 62]
+  TICK: 1522 PC:  50 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [25, 44, 1023]
+  TICK: 1530 PC:  51 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [25, 1023]
+  TICK: 1533 PC:  52 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [25]
+  TICK: 1536 PC:  53 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 42}     DATA: 0      STACK: [26]
+  TICK: 1539 PC:  54 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [26, 42]
+  TICK: 1543 PC:  42 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [26]
+  TICK: 1547 PC:  43 AR:   26 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 32     STACK: [26, 32]
+  TICK: 1550 PC:  44 AR:   26 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 55}     DATA: 32     STACK: [26, 32]
+  TICK: 1553 PC:  45 AR:   26 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 32     STACK: [26, 32, 55]
+  TICK: 1556 PC:  46 AR:   26 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 32     STACK: [26, 32]
+  TICK: 1559 PC:  47 AR:   26 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 32     STACK: [26, 32, 62]
+  TICK: 1563 PC:  48 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [26, 32, 62, 1023]
+  TICK: 1568 PC:  49 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [26, 32, 1023, 62]
+  TICK: 1571 PC:  50 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [26, 32, 1023]
+  TICK: 1579 PC:  51 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [26, 1023]
+  TICK: 1582 PC:  52 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [26]
+  TICK: 1585 PC:  53 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 42}     DATA: 0      STACK: [27]
+  TICK: 1588 PC:  54 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [27, 42]
+  TICK: 1592 PC:  42 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [27]
+  TICK: 1596 PC:  43 AR:   27 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 0      STACK: [27, 0]
+  TICK: 1599 PC:  44 AR:   27 Z_FLAG: 1  COMMAND: {'code': 'push', 'arg': 55}     DATA: 0      STACK: [27, 0]
+  TICK: 1602 PC:  45 AR:   27 Z_FLAG: 1  COMMAND: {'code': 'jz', 'arg': None}     DATA: 0      STACK: [27, 0, 55]
+  TICK: 1606 PC:  55 AR:   27 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [27, 0]
+  TICK: 1609 PC:  56 AR:   27 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [27]
+  TICK: 1612 PC:  57 AR:   27 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 30}     DATA: 0      STACK: []
+  TICK: 1615 PC:  58 AR:   27 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [30]
+  TICK: 1619 PC:  59 AR:   30 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 73     STACK: [30, 73]
+  TICK: 1622 PC:  60 AR:   30 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 71}     DATA: 73     STACK: [30, 73]
+  TICK: 1625 PC:  61 AR:   30 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 73     STACK: [30, 73, 71]
+  TICK: 1628 PC:  62 AR:   30 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 73     STACK: [30, 73]
+  TICK: 1631 PC:  63 AR:   30 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 73     STACK: [30, 73, 62]
+  TICK: 1635 PC:  64 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [30, 73, 62, 1023]
+  TICK: 1640 PC:  65 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [30, 73, 1023, 62]
+  TICK: 1643 PC:  66 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [30, 73, 1023]
+  TICK: 1651 PC:  67 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [30, 1023]
+  TICK: 1654 PC:  68 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [30]
+  TICK: 1657 PC:  69 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 58}     DATA: 0      STACK: [31]
+  TICK: 1660 PC:  70 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [31, 58]
+  TICK: 1664 PC:  58 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [31]
+  TICK: 1668 PC:  59 AR:   31 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 108    STACK: [31, 108]
+  TICK: 1671 PC:  60 AR:   31 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 71}     DATA: 108    STACK: [31, 108]
+  TICK: 1674 PC:  61 AR:   31 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 108    STACK: [31, 108, 71]
+  TICK: 1677 PC:  62 AR:   31 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 108    STACK: [31, 108]
+  TICK: 1680 PC:  63 AR:   31 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 108    STACK: [31, 108, 62]
+  TICK: 1684 PC:  64 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [31, 108, 62, 1023]
+  TICK: 1689 PC:  65 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [31, 108, 1023, 62]
+  TICK: 1692 PC:  66 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [31, 108, 1023]
+  TICK: 1700 PC:  67 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [31, 1023]
+  TICK: 1703 PC:  68 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [31]
+  TICK: 1706 PC:  69 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 58}     DATA: 0      STACK: [32]
+  TICK: 1709 PC:  70 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [32, 58]
+  TICK: 1713 PC:  58 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [32]
+  TICK: 1717 PC:  59 AR:   32 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 105    STACK: [32, 105]
+  TICK: 1720 PC:  60 AR:   32 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 71}     DATA: 105    STACK: [32, 105]
+  TICK: 1723 PC:  61 AR:   32 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 105    STACK: [32, 105, 71]
+  TICK: 1726 PC:  62 AR:   32 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 105    STACK: [32, 105]
+  TICK: 1729 PC:  63 AR:   32 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 105    STACK: [32, 105, 62]
+  TICK: 1733 PC:  64 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [32, 105, 62, 1023]
+  TICK: 1738 PC:  65 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [32, 105, 1023, 62]
+  TICK: 1741 PC:  66 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [32, 105, 1023]
+  TICK: 1749 PC:  67 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [32, 1023]
+  TICK: 1752 PC:  68 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [32]
+  TICK: 1755 PC:  69 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 58}     DATA: 0      STACK: [33]
+  TICK: 1758 PC:  70 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [33, 58]
+  TICK: 1762 PC:  58 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [33]
+  TICK: 1766 PC:  59 AR:   33 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 97     STACK: [33, 97]
+  TICK: 1769 PC:  60 AR:   33 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 71}     DATA: 97     STACK: [33, 97]
+  TICK: 1772 PC:  61 AR:   33 Z_FLAG: 0  COMMAND: {'code': 'jz', 'arg': None}     DATA: 97     STACK: [33, 97, 71]
+  TICK: 1775 PC:  62 AR:   33 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 97     STACK: [33, 97]
+  TICK: 1778 PC:  63 AR:   33 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 97     STACK: [33, 97, 62]
+  TICK: 1782 PC:  64 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [33, 97, 62, 1023]
+  TICK: 1787 PC:  65 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [33, 97, 1023, 62]
+  TICK: 1790 PC:  66 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [33, 97, 1023]
+  TICK: 1798 PC:  67 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [33, 1023]
+  TICK: 1801 PC:  68 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'inc', 'arg': None}    DATA: 0      STACK: [33]
+  TICK: 1804 PC:  69 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 58}     DATA: 0      STACK: [34]
+  TICK: 1807 PC:  70 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'jmp', 'arg': None}    DATA: 0      STACK: [34, 58]
+  TICK: 1811 PC:  58 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [34]
+  TICK: 1815 PC:  59 AR:   34 Z_FLAG: 0  COMMAND: {'code': 'test', 'arg': None}   DATA: 0      STACK: [34, 0]
+  TICK: 1818 PC:  60 AR:   34 Z_FLAG: 1  COMMAND: {'code': 'push', 'arg': 71}     DATA: 0      STACK: [34, 0]
+  TICK: 1821 PC:  61 AR:   34 Z_FLAG: 1  COMMAND: {'code': 'jz', 'arg': None}     DATA: 0      STACK: [34, 0, 71]
+  TICK: 1825 PC:  71 AR:   34 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [34, 0]
+  TICK: 1828 PC:  72 AR:   34 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [34]
+  TICK: 1831 PC:  73 AR:   34 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 28}     DATA: 0      STACK: []
+  TICK: 1834 PC:  74 AR:   34 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 0      STACK: [28]
+  TICK: 1838 PC:  75 AR:   28 Z_FLAG: 0  COMMAND: {'code': 'push', 'arg': 62}     DATA: 33     STACK: [28, 33]
+  TICK: 1841 PC:  76 AR:   28 Z_FLAG: 0  COMMAND: {'code': 'ld', 'arg': None}     DATA: 33     STACK: [28, 33, 62]
+  TICK: 1845 PC:  77 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'swap', 'arg': None}   DATA: 1023   STACK: [28, 33, 62, 1023]
+  TICK: 1850 PC:  78 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 1023   STACK: [28, 33, 1023, 62]
+  TICK: 1853 PC:  79 AR:   62 Z_FLAG: 0  COMMAND: {'code': 'st', 'arg': None}     DATA: 1023   STACK: [28, 33, 1023]
+  TICK: 1861 PC:  80 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [28, 1023]
+  TICK: 1864 PC:  81 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'pop', 'arg': None}    DATA: 0      STACK: [28]
+  TICK: 1867 PC:  82 AR: 1023 Z_FLAG: 0  COMMAND: {'code': 'hlt', 'arg': None}    DATA: 0      STACK: []
+output: |
+  output:  What is your name? Hello, Ilia!
+  command_counter:  495  number_of_ticks:  1869
+data_json: |-
+  [
+    87,
+    104,
+    97,
+    116,
+    32,
+    105,
+    115,
+    32,
+    121,
+    111,
+    117,
+    114,
+    32,
+    110,
+    97,
+    109,
+    101,
+    63,
+    32,
+    0,
+    72,
+    101,
+    108,
+    108,
+    111,
+    44,
+    32,
+    0,
+    33,
+    0,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
+    1023
+  ]
+code_json: |-
+  [
+    {
+      "code": "push",
+      "arg": 0
+    },
+    {
+      "code": "ld",
+      "arg": null
+    },
+    {
+      "code": "test",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 14
+    },
+    {
+      "code": "jz",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 62
+    },
+    {
+      "code": "ld",
+      "arg": null
+    },
+    {
+      "code": "swap",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "st",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "inc",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 1
+    },
+    {
+      "code": "jmp",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 30
+    },
+    {
+      "code": "push",
+      "arg": 62
+    },
+    {
+      "code": "ld",
+      "arg": null
+    },
+    {
+      "code": "ld",
+      "arg": null
+    },
+    {
+      "code": "test",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 34
+    },
+    {
+      "code": "jz",
+      "arg": null
+    },
+    {
+      "code": "swap",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "swap",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "swap",
+      "arg": null
+    },
+    {
+      "code": "st",
+      "arg": null
+    },
+    {
+      "code": "inc",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 62
+    },
+    {
+      "code": "ld",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 19
+    },
+    {
+      "code": "jmp",
+      "arg": null
+    },
+    {
+      "code": "swap",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "swap",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "swap",
+      "arg": null
+    },
+    {
+      "code": "st",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 20
+    },
+    {
+      "code": "ld",
+      "arg": null
+    },
+    {
+      "code": "test",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 55
+    },
+    {
+      "code": "jz",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 62
+    },
+    {
+      "code": "ld",
+      "arg": null
+    },
+    {
+      "code": "swap",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "st",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "inc",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 42
+    },
+    {
+      "code": "jmp",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 30
+    },
+    {
+      "code": "ld",
+      "arg": null
+    },
+    {
+      "code": "test",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 71
+    },
+    {
+      "code": "jz",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 62
+    },
+    {
+      "code": "ld",
+      "arg": null
+    },
+    {
+      "code": "swap",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "st",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "inc",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 58
+    },
+    {
+      "code": "jmp",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 28
+    },
+    {
+      "code": "ld",
+      "arg": null
+    },
+    {
+      "code": "push",
+      "arg": 62
+    },
+    {
+      "code": "ld",
+      "arg": null
+    },
+    {
+      "code": "swap",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "st",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "pop",
+      "arg": null
+    },
+    {
+      "code": "hlt",
+      "arg": null
+    }
+  ]
